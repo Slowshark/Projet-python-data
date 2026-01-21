@@ -42,7 +42,10 @@ wheels/
 data/raw/*
 data/processed/*
 !data/.gitkeep
-
+data4project/alertes/*
+data4project/Avis/*
+data4project/first/*
+data4project/mitre/*
 # Output
 output/*
 !output/.gitkeep

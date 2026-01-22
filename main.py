@@ -18,6 +18,7 @@ from cve_enricher import CVEEnricher
 from data_consolidator import DataConsolidator
 from alert_generator import AlertGenerator
 from email_notifier import EmailNotifier
+from local_data_loader import LocalDataLoader
 
 def print_section(title):
     """Affiche une section de titre"""
@@ -33,65 +34,81 @@ def main():
     print("d'analyse des vulnérabilités ANSSI en 7 étapes.\n")
     
     try:
-        # ÉTAPE 1 : Extraction RSS
-        print_section("ÉTAPE 1 : EXTRACTION DES FLUX RSS")
-        print("Extraction des avis et alertes ANSSI...")
+        # ÉTAPE 1 : Chargement des données locales (au lieu du RSS)
+        print_section("ÉTAPE 1 : CHARGEMENT DES DONNÉES LOCALES")
+        print("Chargement des alertes ANSSI depuis data4project...")
+        print("(Le flux RSS ANSSI n'est plus accessible directement)\n")
         
-        # Vérifier si des données existent déjà (pour tests)
         import json
         import os
-        bulletins_file = "data/raw/bulletins_anssi.json"
         
-        if os.path.exists(bulletins_file):
-            with open(bulletins_file, 'r', encoding='utf-8') as f:
-                existing_data = json.load(f)
-                if existing_data.get("avis") or existing_data.get("alertes"):
-                    print("[INFO] Utilisation des données existantes...")
-                    rss_data = existing_data
-                    bulletins_data = rss_data
-                else:
-                    rss_extractor = RSSExtractor(rate_limit_delay=2.0)
-                    rss_data = rss_extractor.extract_all_feeds()
-                    rss_extractor.save_to_json()
-                    bulletins_data = rss_data
-        else:
-            rss_extractor = RSSExtractor(rate_limit_delay=2.0)
-            rss_data = rss_extractor.extract_all_feeds()
-            rss_extractor.save_to_json()
-            bulletins_data = rss_data
+        # Utiliser le LocalDataLoader pour charger les données locales
+        local_loader = LocalDataLoader(data_path="data4project")
+        local_loader.load_alertes()
+        local_loader.load_avis()
+        
+        # Convertir en format compatible avec le reste du pipeline
+        bulletins_data = {
+            "avis": local_loader.avis_data,
+            "alertes": local_loader.alertes_data
+        }
+        
+        # Sauvegarder pour compatibilité avec le reste du code
+        bulletins_file = "data/raw/bulletins_anssi.json"
+        os.makedirs(os.path.dirname(bulletins_file), exist_ok=True)
+        with open(bulletins_file, 'w', encoding='utf-8') as f:
+            json.dump(bulletins_data, f, ensure_ascii=False, indent=2)
+        
+        print(f"[SUCCÈS] {len(local_loader.alertes_data)} alertes et {len(local_loader.avis_data)} avis chargés")
         
         # ÉTAPE 2 : Extraction CVE
         print_section("ÉTAPE 2 : EXTRACTION DES CVE")
         print("Identification des CVE dans les bulletins...")
         
-        cve_extractor = CVEExtractor(rate_limit_delay=2.0)
-        # Chargement des bulletins depuis l'étape 1
-        with open("data/raw/bulletins_anssi.json", 'r', encoding='utf-8') as f:
-            bulletins_data = json.load(f)
-        all_bulletins = bulletins_data.get("avis", []) + bulletins_data.get("alertes", [])
+        # Extraire les CVE directement depuis les données locales
+        all_cves = set()
+        bulletin_cve_mapping = []
         
-        # Limitation pour les tests (à modifier)
-        # all_bulletins = all_bulletins[:5]
+        for alerte in local_loader.alertes_data:
+            cves_in_alerte = alerte.get("cves", [])
+            cve_ids = [cve.get("name") for cve in cves_in_alerte if cve.get("name")]
+            all_cves.update(cve_ids)
+            if cve_ids:
+                bulletin_cve_mapping.append({
+                    "bulletin_id": alerte.get("reference", "N/A"),
+                    "titre": alerte.get("title", "N/A"),
+                    "cves": cve_ids
+                })
         
-        # Vérifier si les données CVE existent déjà
+        for avis in local_loader.avis_data:
+            cves_in_avis = avis.get("cves", [])
+            cve_ids = [cve.get("name") for cve in cves_in_avis if cve.get("name")]
+            all_cves.update(cve_ids)
+            if cve_ids:
+                bulletin_cve_mapping.append({
+                    "bulletin_id": avis.get("reference", "N/A"),
+                    "titre": avis.get("title", "N/A"),
+                    "cves": cve_ids
+                })
+        
+        cve_results = {
+            "bulletins_processed": len(local_loader.alertes_data) + len(local_loader.avis_data),
+            "total_unique_cves": list(all_cves),
+            "bulletin_cve_mapping": bulletin_cve_mapping,
+            "total_unique_cve_count": len(all_cves)
+        }
+        
+        # Sauvegarder les résultats
         cves_file = "data/raw/cves_extracted.json"
-        if os.path.exists(cves_file):
-            with open(cves_file, 'r', encoding='utf-8') as f:
-                existing_cves = json.load(f)
-                if existing_cves.get("total_unique_cves"):
-                    print("[INFO] Utilisation des CVE existants...")
-                    cve_results = existing_cves
-                else:
-                    cve_results = cve_extractor.extract_cves_from_bulletins(all_bulletins)
-                    cve_extractor.save_to_json(cve_results)
-        else:
-            cve_results = cve_extractor.extract_cves_from_bulletins(all_bulletins)
-            cve_extractor.save_to_json(cve_results)
+        with open(cves_file, 'w', encoding='utf-8') as f:
+            json.dump(cve_results, f, ensure_ascii=False, indent=2)
+        
+        print(f"[SUCCÈS] {len(all_cves)} CVE uniques extraits de {len(bulletin_cve_mapping)} bulletins")
         
         # ÉTAPE 3 : Enrichissement CVE
         print_section("ÉTAPE 3 : ENRICHISSEMENT DES CVE")
         print("Récupération des informations MITRE et EPSS...")
-        print("(Attention: utiliser les fichiers locaux en priorité)\n")
+        print("(Utilisation des fichiers locaux en priorité)\n")
         
         cve_enricher = CVEEnricher(rate_limit_delay=2.0, use_local_files=True)
         cve_list = cve_results.get("total_unique_cves", [])

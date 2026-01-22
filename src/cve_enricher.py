@@ -37,7 +37,7 @@ class CVEEnricher:
         """
         # Essai avec les fichiers locaux si activé
         if self.use_local_files:
-            local_path = os.path.join("data/raw/mitre", cve_id)
+            local_path = os.path.join("data4project/mitre", cve_id)
             if os.path.exists(local_path):
                 try:
                     with open(local_path, 'r', encoding='utf-8') as f:
@@ -71,7 +71,7 @@ class CVEEnricher:
         """
         # Essai avec les fichiers locaux si activé
         if self.use_local_files:
-            local_path = os.path.join("data/raw/first", cve_id)
+            local_path = os.path.join("data4project/first", cve_id)
             if os.path.exists(local_path):
                 try:
                     with open(local_path, 'r', encoding='utf-8') as f:

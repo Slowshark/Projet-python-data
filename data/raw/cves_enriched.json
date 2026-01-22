@@ -1,0 +1,423 @@
+[
+  {
+    "cve_id": "CVE-2023-36920",
+    "cvss_score": 6.1,
+    "base_severity": "MEDIUM",
+    "cvss_version": "cvssV3_1",
+    "cwe_id": "CWE-1021",
+    "cwe_description": "CWE-1021 Improper Restriction of Rendered UI Layers or Frames",
+    "epss_score": 0.00109,
+    "affected_products": [
+      {
+        "vendor": "SAP SE",
+        "product": "SAP Enable Now",
+        "affected_versions": [
+          "WPB_MANAGER 1.0, WPB_MANAGER_CE 10",
+          "WPB_MANAGER_HANA 10",
+          "ENABLE_NOW_CONSUMP_DEL 1704"
+        ]
+      }
+    ],
+    "description": "In SAP Enable Now - versions WPB_MANAGER 1.0, WPB_MANAGER_CE 10, WPB_MANAGER_HANA 10, ENABLE_NOW_CONSUMP_DEL 1704, the X-FRAME-OPTIONS response header is not implemented, allowing an unauthenticated attacker to attempt clickjacking, which could result in disclosure or modification of information.\n\n\n",
+    "errors": []
+  },
+  {
+    "cve_id": "CVE-2024-35895",
+    "cvss_score": null,
+    "base_severity": null,
+    "cvss_version": "",
+    "cwe_id": "Non disponible",
+    "cwe_description": "Non disponible",
+    "epss_score": 0.0001,
+    "affected_products": [
+      {
+        "vendor": "Linux",
+        "product": "Linux",
+        "affected_versions": [
+          "604326b41a6fb9b4a78b6179335decee0365cd8c",
+          "604326b41a6fb9b4a78b6179335decee0365cd8c",
+          "604326b41a6fb9b4a78b6179335decee0365cd8c",
+          "604326b41a6fb9b4a78b6179335decee0365cd8c",
+          "604326b41a6fb9b4a78b6179335decee0365cd8c",
+          "604326b41a6fb9b4a78b6179335decee0365cd8c",
+          "604326b41a6fb9b4a78b6179335decee0365cd8c"
+        ]
+      },
+      {
+        "vendor": "Linux",
+        "product": "Linux",
+        "affected_versions": [
+          "4.20"
+        ]
+      }
+    ],
+    "description": "In the Linux kernel, the following vulnerability has been resolved:\n\nbpf, sockmap: Prevent lock inversion deadlock in map delete elem\n\nsyzkaller started using corpuses where a BPF tracing program deletes\nelements from a sockmap/sockhash map. Because BPF tracing programs can be\ninvoked from any interrupt context, locks taken during a map_delete_elem\noperation must be hardirq-safe. Otherwise a deadlock due to lock inversion\nis possible, as reported by lockdep:\n\n       CPU0                    CPU1\n",
+    "errors": []
+  },
+  {
+    "cve_id": "CVE-2024-21607",
+    "cvss_score": 5.3,
+    "base_severity": "MEDIUM",
+    "cvss_version": "cvssV3_1",
+    "cwe_id": "CWE-447",
+    "cwe_description": "CWE-447 Unimplemented or Unsupported Feature in UI",
+    "epss_score": 0.0004,
+    "affected_products": [
+      {
+        "vendor": "Juniper Networks",
+        "product": "Junos OS",
+        "affected_versions": [
+          "0",
+          "21.1",
+          "21.2",
+          "21.3",
+          "21.4",
+          "22.1",
+          "22.2",
+          "22.3",
+          "22.4"
+        ]
+      }
+    ],
+    "description": "\nAn Unsupported Feature in the UI vulnerability in Juniper Networks Junos OS on MX Series and EX9200 Series allows an unauthenticated, network-based attacker to cause partial impact to the integrity of the device.\n\nIf the \"tcp-reset\" option is added to the \"reject\" action in an IPv6 filter which matches on \"payload-protocol\", packets are permitted instead of rejected. This happens because the payload-protocol match criteria is not supported in the kernel filter causing it to accept all packets w",
+    "errors": []
+  },
+  {
+    "cve_id": "CVE-2025-59186",
+    "cvss_score": 5.5,
+    "base_severity": "MEDIUM",
+    "cvss_version": "cvssV3_1",
+    "cwe_id": "CWE-200",
+    "cwe_description": "CWE-200: Exposure of Sensitive Information to an Unauthorized Actor",
+    "epss_score": 0.00077,
+    "affected_products": [
+      {
+        "vendor": "Microsoft",
+        "product": "Windows Server 2019",
+        "affected_versions": [
+          "10.0.17763.0"
+        ]
+      },
+      {
+        "vendor": "Microsoft",
+        "product": "Windows Server 2019 (Server Core installation)",
+        "affected_versions": [
+          "10.0.17763.0"
+        ]
+      },
+      {
+        "vendor": "Microsoft",
+        "product": "Windows Server 2022",
+        "affected_versions": [
+          "10.0.20348.0"
+        ]
+      },
+      {
+        "vendor": "Microsoft",
+        "product": "Windows Server 2025 (Server Core installation)",
+        "affected_versions": [
+          "10.0.26100.0"
+        ]
+      },
+      {
+        "vendor": "Microsoft",
+        "product": "Windows Server 2022, 23H2 Edition (Server Core installation)",
+        "affected_versions": [
+          "10.0.25398.0"
+        ]
+      },
+      {
+        "vendor": "Microsoft",
+        "product": "Windows Server 2025",
+        "affected_versions": [
+          "10.0.26100.0"
+        ]
+      },
+      {
+        "vendor": "Microsoft",
+        "product": "Windows Server 2016",
+        "affected_versions": [
+          "10.0.14393.0"
+        ]
+      },
+      {
+        "vendor": "Microsoft",
+        "product": "Windows Server 2016 (Server Core installation)",
+        "affected_versions": [
+          "10.0.14393.0"
+        ]
+      }
+    ],
+    "description": "Exposure of sensitive information to an unauthorized actor in Windows Kernel allows an authorized attacker to disclose information locally.",
+    "errors": []
+  },
+  {
+    "cve_id": "CVE-2023-6246",
+    "cvss_score": null,
+    "base_severity": null,
+    "cvss_version": "",
+    "cwe_id": "CWE-122",
+    "cwe_description": "Heap-based Buffer Overflow",
+    "epss_score": 0.24316,
+    "affected_products": [
+      {
+        "vendor": "n/a",
+        "product": "glibc",
+        "affected_versions": []
+      },
+      {
+        "vendor": "Red Hat",
+        "product": "Red Hat Enterprise Linux 6",
+        "affected_versions": []
+      },
+      {
+        "vendor": "Red Hat",
+        "product": "Red Hat Enterprise Linux 6",
+        "affected_versions": []
+      },
+      {
+        "vendor": "Red Hat",
+        "product": "Red Hat Enterprise Linux 7",
+        "affected_versions": []
+      },
+      {
+        "vendor": "Red Hat",
+        "product": "Red Hat Enterprise Linux 7",
+        "affected_versions": []
+      },
+      {
+        "vendor": "Red Hat",
+        "product": "Red Hat Enterprise Linux 8",
+        "affected_versions": []
+      },
+      {
+        "vendor": "Red Hat",
+        "product": "Red Hat Enterprise Linux 9",
+        "affected_versions": []
+      },
+      {
+        "vendor": "Fedora",
+        "product": "Fedora",
+        "affected_versions": []
+      }
+    ],
+    "description": "A heap-based buffer overflow was found in the __vsyslog_internal function of the glibc library. This function is called by the syslog and vsyslog functions. This issue occurs when the openlog function was not called, or called with the ident argument set to NULL, and the program name (the basename of argv[0]) is bigger than 1024 bytes, resulting in an application crash or local privilege escalation. This issue affects glibc 2.36 and newer.",
+    "errors": []
+  },
+  {
+    "cve_id": "CVE-2025-43347",
+    "cvss_score": null,
+    "base_severity": null,
+    "cvss_version": "",
+    "cwe_id": "Non disponible",
+    "cwe_description": "An input validation issue was addressed",
+    "epss_score": 0.00252,
+    "affected_products": [
+      {
+        "vendor": "Apple",
+        "product": "iOS and iPadOS",
+        "affected_versions": [
+          "unspecified"
+        ]
+      },
+      {
+        "vendor": "Apple",
+        "product": "tvOS",
+        "affected_versions": [
+          "unspecified"
+        ]
+      },
+      {
+        "vendor": "Apple",
+        "product": "visionOS",
+        "affected_versions": [
+          "unspecified"
+        ]
+      },
+      {
+        "vendor": "Apple",
+        "product": "watchOS",
+        "affected_versions": [
+          "unspecified"
+        ]
+      }
+    ],
+    "description": "This issue was addressed by removing the vulnerable code. This issue is fixed in visionOS 26, tvOS 26, iOS 26 and iPadOS 26, watchOS 26. An input validation issue was addressed.",
+    "errors": []
+  },
+  {
+    "cve_id": "CVE-2022-29561",
+    "cvss_score": 7.5,
+    "base_severity": "HIGH",
+    "cvss_version": "cvssV3_1",
+    "cwe_id": "CWE-352",
+    "cwe_description": "CWE-352: Cross-Site Request Forgery (CSRF)",
+    "epss_score": 0.00212,
+    "affected_products": [
+      {
+        "vendor": "Siemens",
+        "product": "RUGGEDCOM ROX MX5000",
+        "affected_versions": [
+          "All versions < V2.16.0"
+        ]
+      },
+      {
+        "vendor": "Siemens",
+        "product": "RUGGEDCOM ROX MX5000RE",
+        "affected_versions": [
+          "All versions < V2.16.0"
+        ]
+      },
+      {
+        "vendor": "Siemens",
+        "product": "RUGGEDCOM ROX RX1400",
+        "affected_versions": [
+          "All versions < V2.16.0"
+        ]
+      },
+      {
+        "vendor": "Siemens",
+        "product": "RUGGEDCOM ROX RX1500",
+        "affected_versions": [
+          "All versions < V2.16.0"
+        ]
+      },
+      {
+        "vendor": "Siemens",
+        "product": "RUGGEDCOM ROX RX1501",
+        "affected_versions": [
+          "All versions < V2.16.0"
+        ]
+      },
+      {
+        "vendor": "Siemens",
+        "product": "RUGGEDCOM ROX RX1510",
+        "affected_versions": [
+          "All versions < V2.16.0"
+        ]
+      },
+      {
+        "vendor": "Siemens",
+        "product": "RUGGEDCOM ROX RX1511",
+        "affected_versions": [
+          "All versions < V2.16.0"
+        ]
+      },
+      {
+        "vendor": "Siemens",
+        "product": "RUGGEDCOM ROX RX1512",
+        "affected_versions": [
+          "All versions < V2.16.0"
+        ]
+      },
+      {
+        "vendor": "Siemens",
+        "product": "RUGGEDCOM ROX RX1524",
+        "affected_versions": [
+          "All versions < V2.16.0"
+        ]
+      },
+      {
+        "vendor": "Siemens",
+        "product": "RUGGEDCOM ROX RX1536",
+        "affected_versions": [
+          "All versions < V2.16.0"
+        ]
+      },
+      {
+        "vendor": "Siemens",
+        "product": "RUGGEDCOM ROX RX5000",
+        "affected_versions": [
+          "All versions < V2.16.0"
+        ]
+      }
+    ],
+    "description": "A vulnerability has been identified in RUGGEDCOM ROX MX5000 (All versions < V2.16.0), RUGGEDCOM ROX MX5000RE (All versions < V2.16.0), RUGGEDCOM ROX RX1400 (All versions < V2.16.0), RUGGEDCOM ROX RX1500 (All versions < V2.16.0), RUGGEDCOM ROX RX1501 (All versions < V2.16.0), RUGGEDCOM ROX RX1510 (All versions < V2.16.0), RUGGEDCOM ROX RX1511 (All versions < V2.16.0), RUGGEDCOM ROX RX1512 (All versions < V2.16.0), RUGGEDCOM ROX RX1524 (All versions < V2.16.0), RUGGEDCOM ROX RX1536 (All versions <",
+    "errors": []
+  },
+  {
+    "cve_id": "CVE-2023-40110",
+    "cvss_score": null,
+    "base_severity": null,
+    "cvss_version": "",
+    "cwe_id": "Non disponible",
+    "cwe_description": "Elevation of privilege",
+    "epss_score": 0.00025,
+    "affected_products": [
+      {
+        "vendor": "Google",
+        "product": "Android",
+        "affected_versions": [
+          "14",
+          "13",
+          "12L",
+          "12",
+          "11"
+        ]
+      }
+    ],
+    "description": "In multiple functions of MtpPacket.cpp, there is a possible out of bounds write due to a heap buffer overflow. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is needed for exploitation.",
+    "errors": []
+  },
+  {
+    "cve_id": "CVE-2025-31281",
+    "cvss_score": null,
+    "base_severity": null,
+    "cvss_version": "",
+    "cwe_id": "Non disponible",
+    "cwe_description": "Processing a maliciously crafted file may lead to unexpected app termination",
+    "epss_score": 0.00115,
+    "affected_products": [
+      {
+        "vendor": "Apple",
+        "product": "macOS",
+        "affected_versions": [
+          "unspecified"
+        ]
+      },
+      {
+        "vendor": "Apple",
+        "product": "tvOS",
+        "affected_versions": [
+          "unspecified"
+        ]
+      },
+      {
+        "vendor": "Apple",
+        "product": "visionOS",
+        "affected_versions": [
+          "unspecified"
+        ]
+      },
+      {
+        "vendor": "Apple",
+        "product": "iOS and iPadOS",
+        "affected_versions": [
+          "unspecified"
+        ]
+      }
+    ],
+    "description": "An input validation issue was addressed with improved memory handling. This issue is fixed in visionOS 2.6, tvOS 18.6, macOS Sequoia 15.6, iOS 18.6 and iPadOS 18.6. Processing a maliciously crafted file may lead to unexpected app termination.",
+    "errors": []
+  },
+  {
+    "cve_id": "CVE-2023-33985",
+    "cvss_score": 6.1,
+    "base_severity": "MEDIUM",
+    "cvss_version": "cvssV3_1",
+    "cwe_id": "CWE-79",
+    "cwe_description": "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "epss_score": 0.00399,
+    "affected_products": [
+      {
+        "vendor": "SAP_SE",
+        "product": "SAP NetWeaver Enterprise Portal",
+        "affected_versions": [
+          "7.50"
+        ]
+      }
+    ],
+    "description": "SAP NetWeaver Enterprise Portal - version 7.50, does not sufficiently encode user-controlled inputs over the network, resulting in reflected Cross-Site Scripting (XSS) vulnerability, therefore changing the scope of the attack. On successful exploitation, an attacker can view or modify information causing a limited impact on confidentiality and integrity of the application.\n\n",
+    "errors": []
+  }
+]

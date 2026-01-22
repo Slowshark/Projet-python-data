@@ -39,8 +39,6 @@ wheels/
 .env.local
 
 # Data
-data/raw/*
-data/processed/*
 !data/.gitkeep
 data4project/alertes/*
 data4project/Avis/*
